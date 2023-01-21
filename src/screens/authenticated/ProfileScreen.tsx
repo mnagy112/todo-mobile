@@ -21,7 +21,7 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 30,
+    fontSize: 24,
     marginBottom: 32
   },
   sep: {
