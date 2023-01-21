@@ -1,13 +1,15 @@
-import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from 'react-native';
-import Layout from '../../layout/Layout';
+import { Camera } from 'expo-camera';
+import { BarCodeScanningResult } from 'expo-camera/src/Camera.types';
+import * as Haptics from 'expo-haptics';
 import { useEffect, useState } from 'react';
-import { ToDo } from '../../context/ToDoContext/types';
+import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+
+import { useIsFocused } from '@react-navigation/native';
+
 import Button from '../../components/Button/Button';
 import ToDoItemShared from '../../components/ToDoItemShared/ToDoItemShared';
-import * as Haptics from 'expo-haptics';
-import { Camera } from 'expo-camera';
-import { useIsFocused } from '@react-navigation/native';
-import { BarCodeScanningResult } from 'expo-camera/src/Camera.types';
+import { ToDo } from '../../context/ToDoContext/types';
+import Layout from '../../layout/Layout';
 
 interface Data {
   userName: string;
@@ -20,12 +22,12 @@ const LoadToDosScreen = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    Camera.requestCameraPermissionsAsync()
+    Camera.requestCameraPermissionsAsync();
   }, []);
 
   const handleCodeScanned = ({ data: value }: BarCodeScanningResult) => {
     setLoading(true);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
 
     try {
       const loaded: any = JSON.parse(value);
@@ -34,14 +36,21 @@ const LoadToDosScreen = () => {
         throw new Error();
       }
 
-      if (loaded.toDos.some((toDo: any) => !toDo.title || typeof toDo.title !== 'string' || (toDo.description && typeof toDo.description !== 'string' ))) {
-        throw new Error()
+      if (
+        loaded.toDos.some(
+          (toDo: any) =>
+            !toDo.title ||
+            typeof toDo.title !== 'string' ||
+            (toDo.description && typeof toDo.description !== 'string'),
+        )
+      ) {
+        throw new Error();
       }
 
       setData(loaded);
       setLoading(false);
     } catch (e) {
-      Alert.alert('Invalid QR code format')
+      Alert.alert('Invalid QR code format');
     }
   };
 
@@ -56,11 +65,7 @@ const LoadToDosScreen = () => {
       {!data && (
         <View style={styles.container}>
           {!loading && isFocused && (
-            <Camera
-              onBarCodeScanned={handleCodeScanned}
-              style={styles.scanner}
-              ratio="1:1"
-            />
+            <Camera onBarCodeScanned={handleCodeScanned} style={styles.scanner} ratio="1:1" />
           )}
           {loading && (
             <>
@@ -76,7 +81,7 @@ const LoadToDosScreen = () => {
           <FlatList
             style={styles.list}
             data={data.toDos}
-            renderItem={({item}) => <ToDoItemShared toDo={item} />}
+            renderItem={({ item }) => <ToDoItemShared toDo={item} />}
             keyExtractor={(item) => item.id}
           />
           <Button onPress={handleRestartScanning}>Scan again</Button>
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   scanner: {
     width: 300,
@@ -105,7 +110,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flexGrow: 1,
-    marginVertical: 16
+    marginVertical: 16,
   },
 });
 

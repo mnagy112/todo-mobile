@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+
+import { FontAwesome } from '@expo/vector-icons';
+
+import { useToDos } from '../../context/ToDoContext/ToDoContext';
 import { ToDo } from '../../context/ToDoContext/types';
 import Button from '../Button/Button';
-import { FontAwesome } from '@expo/vector-icons';
-import { useToDos } from '../../context/ToDoContext/ToDoContext';
-import { useState } from 'react';
 
 interface Props {
   toDo: ToDo;
@@ -14,9 +16,9 @@ const ToDoItemShared = ({ toDo }: Props) => {
   const { dispatch } = useToDos();
 
   const handleAddToMyPress = () => {
-    dispatch({ type: 'AddToDo', payload: { title: toDo.title, description: toDo.description }})
+    dispatch({ type: 'AddToDo', payload: { title: toDo.title, description: toDo.description } });
     setAdded(true);
-  }
+  };
 
   return (
     <View style={[styles.container, toDo.completedAt && styles.done]}>
@@ -43,17 +45,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 8,
-    marginBottom: 8
+    marginBottom: 8,
   },
   done: {
-    opacity: 0.5
+    opacity: 0.5,
   },
   title: {
     fontSize: 20,
   },
   description: {
     marginTop: 4,
-    fontSize: 12
+    fontSize: 12,
   },
 });
 

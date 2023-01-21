@@ -1,12 +1,14 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MyToDosScreen from '../screens/authenticated/MyToDosScreen';
-import ShareToDosScreen from '../screens/authenticated/ShareToDosScreen';
-import LoadToDosScreen from '../screens/authenticated/LoadToDosScreen';
-import ProfileScreen from '../screens/authenticated/ProfileScreen';
-import CustomTabBar from '../layout/CustomTabBar';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import EditToDoScreen from '../screens/authenticated/EditToDoScreen';
+
 import { ToDoProvider } from '../context/ToDoContext/ToDoContext';
+import CustomTabBar from '../layout/CustomTabBar';
+import EditToDoScreen from '../screens/authenticated/EditToDoScreen';
+import LoadToDosScreen from '../screens/authenticated/LoadToDosScreen';
+import MyToDosScreen from '../screens/authenticated/MyToDosScreen';
+import ProfileScreen from '../screens/authenticated/ProfileScreen';
+import ShareToDosScreen from '../screens/authenticated/ShareToDosScreen';
 
 export type AuthenticatedTabParamList = {
   MyToDosScreen: undefined;
@@ -41,10 +43,7 @@ const AuthenticatedNavigator = () => {
   return (
     <ToDoProvider>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen
-          name="AuthenticatedTabNavigator"
-          component={AuthenticatedTabNavigator}
-        />
+        <Stack.Screen name="AuthenticatedTabNavigator" component={AuthenticatedTabNavigator} />
         <Stack.Group>
           <Stack.Screen name="EditToDoScreen" component={EditToDoScreen} />
         </Stack.Group>

@@ -1,5 +1,6 @@
-import { StyleSheet, Text, TextInput } from 'react-native';
 import { useState } from 'react';
+import { StyleSheet, Text, TextInput } from 'react-native';
+
 import Button from '../../components/Button/Button';
 import { useAuth } from '../../context/AuthContext';
 import Layout from '../../layout/Layout';
@@ -9,7 +10,7 @@ const LoginScreen = () => {
   const { login } = useAuth();
 
   const handlePressContinue = () => {
-    login(name)
+    login(name);
   };
 
   return (
@@ -32,14 +33,14 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   centered: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     fontSize: 30,
-    marginBottom: 16
+    marginBottom: 16,
   },
   description: {
-    marginBottom: 32
+    marginBottom: 32,
   },
   input: {
     width: '80%',
@@ -47,8 +48,8 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     borderWidth: 1,
     padding: 8,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default LoginScreen;

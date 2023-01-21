@@ -1,23 +1,27 @@
 import { ToDo } from './types';
 
 type AddToDoAction = {
-  type: 'AddToDo',
+  type: 'AddToDo';
   payload: Pick<ToDo, 'title' | 'description'>;
-}
+};
 
 type UpdateToDoAction = {
-  type: 'UpdateToDo',
+  type: 'UpdateToDo';
   payload: Pick<ToDo, 'id' | 'title' | 'description'>;
-}
+};
 
 type CompleteToDoAction = {
-  type: 'CompleteToDo',
+  type: 'CompleteToDo';
   payload: string;
-}
+};
 
 type DeleteToDoAction = {
-  type: 'DeleteToDo',
+  type: 'DeleteToDo';
   payload: string;
-}
+};
 
-export type MyToDosActionType = AddToDoAction | UpdateToDoAction | CompleteToDoAction | DeleteToDoAction;
+export type MyToDosActionType =
+  | AddToDoAction
+  | UpdateToDoAction
+  | CompleteToDoAction
+  | DeleteToDoAction;

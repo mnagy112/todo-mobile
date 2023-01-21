@@ -1,7 +1,8 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
-import { ToDo } from './types';
-import { reducer } from './reducer';
+
 import { MyToDosActionType } from './actions';
+import { reducer } from './reducer';
+import { ToDo } from './types';
 
 interface Props {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ interface Props {
 
 interface ContextValue {
   toDos: ToDo[];
-  dispatch: Dispatch<MyToDosActionType>
+  dispatch: Dispatch<MyToDosActionType>;
 }
 
 const ToDoContext = createContext<ContextValue>({
@@ -18,20 +19,20 @@ const ToDoContext = createContext<ContextValue>({
 });
 
 export const ToDoProvider = ({ children }: Props) => {
-  const [state, dispatch] = useReducer(reducer, { toDos: [] })
+  const [state, dispatch] = useReducer(reducer, { toDos: [] });
 
   return (
     <ToDoContext.Provider
       value={{
         toDos: [
           ...state.toDos
-            .filter(toDo => !toDo.completedAt)
+            .filter((toDo) => !toDo.completedAt)
             .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
           ...state.toDos
-            .filter(toDo => !!toDo.completedAt)
-            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+            .filter((toDo) => !!toDo.completedAt)
+            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
         ],
-        dispatch
+        dispatch,
       }}
     >
       {children}

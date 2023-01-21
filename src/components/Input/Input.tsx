@@ -24,7 +24,7 @@ const Input = ({ label, onChange, value, placeholder, style }: Props) => {
 
 const styles = StyleSheet.create({
   label: {
-    marginBottom: 4
+    marginBottom: 4,
   },
   input: {
     width: '100%',
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
-  }
+  },
 });
 
 export default Input;

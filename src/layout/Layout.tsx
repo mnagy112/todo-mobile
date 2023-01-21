@@ -1,5 +1,5 @@
-import { KeyboardAvoidingView, Platform, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { ReactNode } from 'react';
+import { KeyboardAvoidingView, Platform, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
@@ -9,7 +9,6 @@ interface Props {
 
 const Layout = ({ children, style }: Props) => {
   return (
-
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={[styles.container, styles.main, style]}
@@ -27,8 +26,8 @@ const styles = StyleSheet.create({
   },
   main: {
     padding: 16,
-    marginBottom: 16
-  }
+    marginBottom: 16,
+  },
 });
 
 export default Layout;

@@ -1,10 +1,13 @@
 import Checkbox from 'expo-checkbox';
-import { StyleSheet, Text, View } from 'react-native';
-import Layout from '../../layout/Layout';
+
 import { useMemo, useState } from 'react';
-import { useToDos } from '../../context/ToDoContext/ToDoContext';
+import { StyleSheet, Text, View } from 'react-native';
+
 import QRCode from 'react-native-qrcode-svg';
+
 import { useLoggedUser } from '../../context/AuthContext';
+import { useToDos } from '../../context/ToDoContext/ToDoContext';
+import Layout from '../../layout/Layout';
 
 const ShareToDosScreen = () => {
   const { toDos } = useToDos();
@@ -12,7 +15,7 @@ const ShareToDosScreen = () => {
   const [includeCompleted, setIncludeCompleted] = useState(false);
 
   const value = useMemo(() => {
-    const items = toDos.filter(toDo => includeCompleted || !toDo.completedAt);
+    const items = toDos.filter((toDo) => includeCompleted || !toDo.completedAt);
 
     if (!items.length) {
       return null;
@@ -20,9 +23,9 @@ const ShareToDosScreen = () => {
 
     return JSON.stringify({
       userName,
-      toDos: items
-    })
-  }, [toDos, includeCompleted])
+      toDos: items,
+    });
+  }, [toDos, includeCompleted]);
 
   return (
     <Layout>
@@ -36,13 +39,7 @@ const ShareToDosScreen = () => {
         <Text>Include completed ToDos</Text>
       </View>
       <View style={styles.code}>
-        {value && (
-          <QRCode
-            value={value}
-            size={250}
-            backgroundColor="transparent"
-          />
-        )}
+        {value && <QRCode value={value} size={250} backgroundColor="transparent" />}
         {!value && <Text>No ToDos to share</Text>}
       </View>
     </Layout>
@@ -51,12 +48,12 @@ const ShareToDosScreen = () => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 24
+    fontSize: 24,
   },
   section: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 24
+    marginTop: 24,
   },
   checkbox: {
     marginRight: 8,
@@ -64,8 +61,8 @@ const styles = StyleSheet.create({
   code: {
     flexGrow: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default ShareToDosScreen;

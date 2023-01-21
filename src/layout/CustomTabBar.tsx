@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 
+import { FontAwesome } from '@expo/vector-icons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
 import { useNavigation } from '@react-navigation/native';
-import { FontAwesome } from '@expo/vector-icons';
-import { AuthenticatedTabParamList } from '../navigators/AuthenticatedNavigator';
 
+import { AuthenticatedTabParamList } from '../navigators/AuthenticatedNavigator';
 
 const CustomTabBar = ({ state }: BottomTabBarProps) => {
   const { navigate } = useNavigation();
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 4,
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
 export default CustomTabBar;

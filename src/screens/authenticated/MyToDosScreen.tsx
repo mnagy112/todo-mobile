@@ -1,9 +1,11 @@
 import { FlatList, StyleSheet, Text } from 'react-native';
-import Layout from '../../layout/Layout';
-import { useToDos } from '../../context/ToDoContext/ToDoContext';
-import ToDoItem from '../../components/ToDoItem/ToDoItem';
-import Button from '../../components/Button/Button';
+
 import { useNavigation } from '@react-navigation/native';
+
+import Button from '../../components/Button/Button';
+import ToDoItem from '../../components/ToDoItem/ToDoItem';
+import { useToDos } from '../../context/ToDoContext/ToDoContext';
+import Layout from '../../layout/Layout';
 
 const MyToDosScreen = () => {
   const { navigate } = useNavigation();
@@ -19,7 +21,7 @@ const MyToDosScreen = () => {
       <FlatList
         style={styles.list}
         data={toDos}
-        renderItem={({item}) => <ToDoItem toDo={item} />}
+        renderItem={({ item }) => <ToDoItem toDo={item} />}
         keyExtractor={(item) => item.id}
       />
       <Button type="success" onPress={handleAddNewPress}>
@@ -32,10 +34,10 @@ const MyToDosScreen = () => {
 const styles = StyleSheet.create({
   title: {
     fontSize: 24,
-    marginBottom: 24
+    marginBottom: 24,
   },
   list: {
-    flexGrow: 1
+    flexGrow: 1,
   },
 });
 

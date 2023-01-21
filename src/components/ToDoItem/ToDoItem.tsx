@@ -1,9 +1,12 @@
 import { StyleSheet, View, Text, Alert } from 'react-native';
+
+import { FontAwesome } from '@expo/vector-icons';
+
+import { useNavigation } from '@react-navigation/native';
+
+import { useToDos } from '../../context/ToDoContext/ToDoContext';
 import { ToDo } from '../../context/ToDoContext/types';
 import Button from '../Button/Button';
-import { FontAwesome } from '@expo/vector-icons';
-import { useToDos } from '../../context/ToDoContext/ToDoContext';
-import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   toDo: ToDo;
@@ -18,13 +21,17 @@ const ToDoItem = ({ toDo }: Props) => {
   };
 
   const handleMarkDonePress = () => {
-    dispatch({ type: 'CompleteToDo', payload: toDo.id})
-  }
+    dispatch({ type: 'CompleteToDo', payload: toDo.id });
+  };
 
   const handleDeletePress = () => {
     Alert.alert('Delete', 'Are you sure?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Confirm', style: 'destructive', onPress: () => dispatch({ type: 'DeleteToDo', payload: toDo.id}) },
+      {
+        text: 'Confirm',
+        style: 'destructive',
+        onPress: () => dispatch({ type: 'DeleteToDo', payload: toDo.id }),
+      },
     ]);
   };
 
@@ -63,24 +70,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 8,
-    marginBottom: 8
+    marginBottom: 8,
   },
   done: {
-    opacity: 0.5
+    opacity: 0.5,
   },
   title: {
     fontSize: 20,
   },
   description: {
     marginTop: 4,
-    fontSize: 12
+    fontSize: 12,
   },
   buttons: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   button: {
-    marginLeft: 8
-  }
+    marginLeft: 8,
+  },
 });
 
 export default ToDoItem;

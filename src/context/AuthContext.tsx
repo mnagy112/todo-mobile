@@ -12,7 +12,7 @@ interface ContextValue {
 
 const AuthContext = createContext<ContextValue>({
   login: () => undefined,
-  logout: () => undefined
+  logout: () => undefined,
 });
 
 export const AuthProvider = ({ children }: Props) => {
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const logout = (): void => {
-    setUserName(undefined)
+    setUserName(undefined);
   };
 
   return (
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: Props) => {
       value={{
         userName,
         login,
-        logout
+        logout,
       }}
     >
       {children}

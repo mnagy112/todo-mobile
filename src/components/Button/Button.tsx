@@ -10,14 +10,7 @@ interface Props {
   icon?: boolean;
 }
 
-const Button = ({
-  children,
-  type,
-  onPress,
-  style,
-  disabled,
-  icon,
-}: Props) => {
+const Button = ({ children, type, onPress, style, disabled, icon }: Props) => {
   return (
     <TouchableOpacity
       style={[
@@ -31,13 +24,7 @@ const Button = ({
       disabled={disabled}
       onPress={onPress}
     >
-      {typeof children === 'string' ? (
-        <Text style={styles.buttonText}>
-          {children}
-        </Text>
-      ) : (
-        children
-      )}
+      {typeof children === 'string' ? <Text style={styles.buttonText}>{children}</Text> : children}
     </TouchableOpacity>
   );
 };
