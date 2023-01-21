@@ -7,6 +7,7 @@ interface Props {
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
+  icon?: boolean;
 }
 
 const Button = ({
@@ -15,6 +16,7 @@ const Button = ({
   onPress,
   style,
   disabled,
+  icon,
 }: Props) => {
   return (
     <TouchableOpacity
@@ -23,6 +25,7 @@ const Button = ({
         type === 'success' && styles.buttonSuccess,
         type === 'error' && styles.buttonError,
         disabled && styles.buttonDisabled,
+        icon && styles.buttonIcon,
         style,
       ]}
       disabled={disabled}
@@ -48,7 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     borderWidth: 1,
     borderColor: 'blue',
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
     borderRadius: 6,
   },
   buttonSuccess: {
@@ -58,6 +62,9 @@ const styles = StyleSheet.create({
   buttonError: {
     backgroundColor: 'red',
     borderColor: 'red',
+  },
+  buttonIcon: {
+    paddingHorizontal: 8,
   },
   buttonDisabled: {
     opacity: 0.3,

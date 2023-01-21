@@ -2,13 +2,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAuth } from '../context/AuthContext';
-import AuthenticatedNavigator, { AuthenticatedParamList } from './AuthenticatedNavigator';
+import AuthenticatedNavigator, { AuthenticatedTabParamList, AuthenticatedStackParamList } from './AuthenticatedNavigator';
 import LoginScreen from '../screens/anonymous/LoginScreen';
 
 declare global {
   namespace ReactNavigation {
     interface RootParamList
-      extends AuthenticatedParamList {}
+      extends AuthenticatedTabParamList, AuthenticatedStackParamList {}
   }
 }
 
@@ -24,7 +24,7 @@ const AppNavigator = () => {
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
         ) : (
           <Stack.Screen
-            name="AuthenticatedDrawerNavigator"
+            name="AuthenticatedNavigator"
             component={AuthenticatedNavigator}
           />
         )}

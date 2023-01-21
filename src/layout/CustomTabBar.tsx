@@ -4,13 +4,14 @@ import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+import { AuthenticatedTabParamList } from '../navigators/AuthenticatedNavigator';
 
 
 const CustomTabBar = ({ state }: BottomTabBarProps) => {
   const { navigate } = useNavigation();
 
   const activeRouteStyle = useCallback(
-    (route: keyof ReactNavigation.RootParamList) => {
+    (route: keyof AuthenticatedTabParamList) => {
       if (route === state.routes[state.index]?.name) {
         return 'blue';
       }
@@ -20,7 +21,7 @@ const CustomTabBar = ({ state }: BottomTabBarProps) => {
     [state],
   );
 
-  const handlePressItem = (route: keyof ReactNavigation.RootParamList) => () => {
+  const handlePressItem = (route: keyof AuthenticatedTabParamList) => () => {
     navigate(route);
   };
 
@@ -51,11 +52,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: 'gray',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
     padding: 12,
   },
   item: {
-    width: '22%',
+    width: 50,
     height: 32,
     justifyContent: 'center',
     alignItems: 'center',

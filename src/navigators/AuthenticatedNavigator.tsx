@@ -4,18 +4,20 @@ import ShareToDosScreen from '../screens/authenticated/ShareToDosScreen';
 import LoadToDosScreen from '../screens/authenticated/LoadToDosScreen';
 import ProfileScreen from '../screens/authenticated/ProfileScreen';
 import CustomTabBar from '../layout/CustomTabBar';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import EditToDoScreen from '../screens/authenticated/EditToDoScreen';
+import { ToDoProvider } from '../context/ToDoContext/ToDoContext';
 
-
-export type AuthenticatedParamList = {
+export type AuthenticatedTabParamList = {
   MyToDosScreen: undefined;
   ShareToDosScreen: undefined;
   LoadToDosScreen: undefined;
   ProfileScreen: undefined;
 };
 
-const Tab = createBottomTabNavigator<AuthenticatedParamList>();
+const Tab = createBottomTabNavigator<AuthenticatedTabParamList>();
 
-const AuthenticatedNavigator = () => {
+const AuthenticatedTabNavigator = () => {
   const handleRenderTabBar = (props: BottomTabBarProps) => <CustomTabBar {...props} />;
 
   return (
@@ -25,6 +27,29 @@ const AuthenticatedNavigator = () => {
       <Tab.Screen name="LoadToDosScreen" component={LoadToDosScreen} />
       <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
     </Tab.Navigator>
+  );
+};
+
+export type AuthenticatedStackParamList = {
+  AuthenticatedTabNavigator: undefined;
+  EditToDoScreen: undefined | { id: string };
+};
+
+const Stack = createNativeStackNavigator<AuthenticatedStackParamList>();
+
+const AuthenticatedNavigator = () => {
+  return (
+    <ToDoProvider>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="AuthenticatedTabNavigator"
+          component={AuthenticatedTabNavigator}
+        />
+        <Stack.Group>
+          <Stack.Screen name="EditToDoScreen" component={EditToDoScreen} />
+        </Stack.Group>
+      </Stack.Navigator>
+    </ToDoProvider>
   );
 };
 
